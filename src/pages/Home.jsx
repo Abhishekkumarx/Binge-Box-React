@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 
 /**
@@ -11,29 +11,35 @@ import MovieCard from "../components/MovieCard";
  * 
  * Next step: connect real API data.
  */
+const apiKey= '875daaf7';
 
 export default function Home() {
+
+  const [movies,setMovies] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function fetchMovie(name) {
+    try {
+      const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${name}`;
+      const response= await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log("Failed to fetch movie data :",error);
+      
+    }
+
+  
+}
+
+useEffect(()=>{
+  fetchMovie("thor");
+},[]);
+
   // UI-only temporary movies (replace with real OMDb fetch later)
-  const [movies, setMovies] = useState([
-    {
-      imdbID: "tt4154796",
-      Title: "Avengers: Endgame",
-      Year: "2019",
-      Poster: "https://m.media-amazon.com/images/M/MV5B...jpg",
-    },
-    {
-      imdbID: "tt0468569",
-      Title: "The Dark Knight",
-      Year: "2008",
-      Poster: "https://m.media-amazon.com/images/M/MV5B...jpg",
-    },
-    {
-      imdbID: "tt0944947",
-      Title: "Game of Thrones",
-      Year: "2011–2019",
-      Poster: "https://m.media-amazon.com/images/M/MV5B...jpg",
-    },
-  ]);
+  
 
   return (
     <div className="flex flex-col gap-8">
