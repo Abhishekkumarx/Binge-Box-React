@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import MovieSlider from './components/MovieSlider';
 import Poster from './components/Poster';
 import Home from './pages/Home';
+import { Routes,Route } from 'react-router-dom';
 
 
 
@@ -15,7 +16,9 @@ function App() {
   return (
     <>
     <Header/>
-    <Home/>
+    <Routes>
+      <Route path='/' element={<Home />}/>
+    </Routes>
     <Footer/>
     </>
   )

@@ -19,8 +19,8 @@ export default function Home() {
       const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${name}`;
       const response= await fetch(url);
       const data = await response.json();
-      if(data.response === 'True'){
-        setMovies(data.search);
+      if(data.Response === 'True'){
+        setMovies(data.Search);
       }else{
         setMovies([]);
         setError("No  Movies Found!!!");
