@@ -5,6 +5,7 @@ import MovieSlider from './components/MovieSlider';
 import Poster from './components/Poster';
 import Home from './pages/Home';
 import { Routes,Route } from 'react-router-dom';
+import Series from './pages/Series';
 
 
 
@@ -18,6 +19,7 @@ function App() {
     <Header/>
     <Routes>
       <Route path='/' element={<Home />}/>
+      <Route path='/series' element={<Series />} />
     </Routes>
     <Footer/>
     </>
