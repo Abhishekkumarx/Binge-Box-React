@@ -1,16 +1,7 @@
-// src/pages/Home.jsx
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import MovieCard from "../components/MovieCard";
 
-/**
- * Home.jsx
- * - Pure UI layout for the home page
- * - Shows section title
- * - Shows search input
- * - Shows responsive movie grid
- * 
- * Next step: connect real API data.
- */
+
 const apiKey= '875daaf7';
 
 export default function Home() {
@@ -20,58 +11,81 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  async function fetchMovie(name) {
+  const fetchMovies = async (name) => {
+    if(!name) return;
+    setLoading(true);
+    setError("");
     try {
       const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${name}`;
       const response= await fetch(url);
       const data = await response.json();
-      return data;
+      if(data.response === 'True'){
+        setMovies(data.search);
+      }else{
+        setMovies([]);
+        setError("No  Movies Found!!!");
+      }
     } catch (error) {
       console.log("Failed to fetch movie data :",error);
       
     }
+    setLoading(false);
 
-  
-}
+  }
 
-useEffect(()=>{
-  fetchMovie("thor");
-},[]);
 
-  // UI-only temporary movies (replace with real OMDb fetch later)
+// useEffect(() => {
+//   fetchMovies("thor");
+// },[]);
+
+const handleSearch = (e) => {
+  e.preventDefault();
+  if(searchText.trim()!=="") fetchMovies(searchText);
+};
+
   
 
   return (
     <div className="flex flex-col gap-8">
       
-      {/* Section Heading */}
       <h1 className="text-3xl font-bold">Popular Movies & Series</h1>
 
-      {/* Search Bar */}
-      <div className="w-full flex justify-center">
+      <form onSubmit={handleSearch} className="w-full flex justify-center">
         <input
           type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
           placeholder="Search movies or series..."
           className="w-full sm:w-1/2 bg-gray-800 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:outline-none border border-gray-700"
         />
-      </div>
+      </form>
 
-      {/* Movie Grid */}
-      <div
-        className="
-          grid 
-          grid-cols-2 
-          sm:grid-cols-3 
-          md:grid-cols-4 
-          lg:grid-cols-5 
-          xl:grid-cols-6 
-          gap-6
-        "
-      >
-        {movies.map((movie) => (
-          <MovieCard key={movie.imdbID} movie={movie} />
-        ))}
-      </div>
+      {loading && (
+        <div className="text-center text-gray-400 text-lg">Loading...</div>
+      )}
+
+      {error && (
+        <div className="text-center text-red-400 text-lg">{error}</div>
+      )}
+
+      {!loading && !error && (
+        <div
+          className="
+            grid 
+            grid-cols-2 
+            sm:grid-cols-3 
+            md:grid-cols-4 
+            lg:grid-cols-5 
+            xl:grid-cols-6 
+            gap-6
+          "
+        >
+          {movies.map((movie) => (
+            <MovieCard key={movie.imdbID} movie={movie} />
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+
+};
