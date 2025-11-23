@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,12 +35,9 @@ function Header() {
 
         {/* DESKTOP NAVIGATION */}
         <nav className="hidden md:flex space-x-8 text-lg">
-          <a href="#" className="text-red-500 underline underline-offset-4">
-            Home
-          </a>
-          <a href="#" className="hover:text-red-500">Movies</a>
-          <a href="#" className="hover:text-red-500">TV Series</a>
-          <a href="#" className="hover:text-red-500">About Us</a>
+                <Link to="/" className="text-white hover:text-red-700 ">Home</Link>
+                <Link to="/series" className="text-white hover:text-red-600">Series</Link>
+
         </nav>
 
         {/* MOBILE MENU BUTTON */}

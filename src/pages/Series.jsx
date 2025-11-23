@@ -1,42 +1,91 @@
-// src/pages/Series.jsx
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import MovieCard from "../components/MovieCard";
 
-const apiKey = "875daaf7";
+
+const apiKey= '875daaf7';
 
 export default function Series() {
-  const [series, setSeries] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchSeries();
-  }, []);
+  const [movies,setMovies] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const fetchSeries = async () => {
-    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=game&type=series`; 
-    // "game" is just default search keyword. You can change it.
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    if (data.Response === "True") setSeries(data.Search);
+  const fetchMovies = async (name) => {
+    if(!name) return;
+    setLoading(true);
+    setError("");
+    try {
+      const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${name}&type=Series`;
+      const response= await fetch(url);
+      const data = await response.json();
+      if(data.Response === 'True'){
+        setMovies(data.Search);
+      }else{
+        setMovies([]);
+        setError("No  Movies Found!!!");
+      }
+    } catch (error) {
+      console.log("Failed to fetch movie data :",error);
+      
+    }
     setLoading(false);
-  };
 
-  if (loading) return <p className="text-white text-center">Loading Series...</p>;
+  }
+
+
+// useEffect(() => {
+//   fetchMovies("thor");
+// },[]);
+
+const handleSearch = (e) => {
+  e.preventDefault();
+  if(searchText.trim()!=="") fetchMovies(searchText);
+};
+
+  
 
   return (
-    <div className="text-white p-6">
-      <h1 className="text-3xl font-bold mb-6">Popular Series</h1>
+    <div className="flex flex-col gap-8">
+      
+      <h1 className="text-3xl font-bold">Popular Movies & Series</h1>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-        {series.map((item) => (
-          <div key={item.imdbID} className="bg-gray-800 p-3 rounded-lg">
-            <img src={item.Poster} alt={item.Title} className="rounded-md mb-2" />
-            <p className="font-semibold">{item.Title}</p>
-            <p className="text-sm text-gray-400">{item.Year}</p>
-          </div>
-        ))}
-      </div>
+      <form onSubmit={handleSearch} className="w-full flex justify-center">
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search movies or series..."
+          className="w-full sm:w-1/2 bg-gray-800 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:outline-none border border-gray-700"
+        />
+      </form>
+
+      {loading && (
+        <div className="text-center text-gray-400 text-lg">Loading...</div>
+      )}
+
+      {error && (
+        <div className="text-center text-red-400 text-lg">{error}</div>
+      )}
+
+      {!loading && !error && (
+        <div
+          className="
+            grid 
+            grid-cols-2 
+            sm:grid-cols-3 
+            md:grid-cols-4 
+            lg:grid-cols-5 
+            xl:grid-cols-6 
+            gap-6
+          "
+        >
+          {movies.map((movie) => (
+            <MovieCard key={movie.imdbID} movie={movie} />
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+
+};
