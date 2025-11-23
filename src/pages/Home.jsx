@@ -8,6 +8,10 @@ export default function Home({ results, loading, error }) {
   const movies = results.filter((item) => item.Type === "movie");
   const series = results.filter((item) => item.Type === "series");
 
+//   useEffect(() => {
+//   fetchResults("thor", "all"); 
+// }, []);
+
   return (
     <div className="flex flex-col gap-12 pt-24">
 

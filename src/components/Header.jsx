@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function Header({ onSearch }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
-  const location = useLocation();
+  const location = useLocation(); // ✅ CORRECT: inside component
 
+   // Clear search input when changing pages
+  useEffect(() => {
+    setSearchText("");  
+  }, [location.pathname]);
+  
   // Handle Search Submit
   const handleSearch = (e) => {
     e.preventDefault();
     if (!searchText.trim()) return;
 
-    //const pageType = location.pathname === "/series" ? "series" : "all";
-  const pageType =
-  location.pathname === "/series"
-    ? "series"
-    : location.pathname === "/movies"
-    ? "movie"
-    : "all";  // home page
+    // Page type based on current route
+    const pageType =
+      location.pathname === "/series"
+        ? "series"
+        : location.pathname === "/movies"
+        ? "movie"
+        : "all"; // default for home
 
     onSearch(searchText.trim(), pageType);
   };
+ 
+
 
   return (
     <>
@@ -29,7 +36,7 @@ function Header({ onSearch }) {
       <header className="fixed top-0 left-0 w-full h-20 bg-[#0e0d0d] text-white px-4 md:px-6 flex items-center justify-between z-50">
 
         {/* LOGO */}
-        <div className="flex items-center space-x-2 cursor-pointer">
+        <Link to="/" className="flex items-center space-x-2 cursor-pointer">
           <img
             src="https://cdn-icons-png.flaticon.com/512/3163/3163478.png"
             alt="logo"
@@ -38,7 +45,7 @@ function Header({ onSearch }) {
           <h1 className="text-xl md:text-2xl font-bold">
             <span className="text-red-600">Binge</span>Box
           </h1>
-        </div>
+        </Link>
 
         {/* SEARCH BAR */}
         <form
@@ -52,7 +59,6 @@ function Header({ onSearch }) {
             onChange={(e) => setSearchText(e.target.value)}
             className="w-full bg-transparent outline-none text-gray-300 text-sm md:text-base"
           />
-
           <button type="submit">
             <i className="text-gray-300 text-lg md:text-xl cursor-pointer">🔍</i>
           </button>
@@ -60,9 +66,39 @@ function Header({ onSearch }) {
 
         {/* DESKTOP NAVIGATION */}
         <nav className="hidden md:flex space-x-8 text-lg">
-          <Link to="/" className="text-white hover:text-red-700">Home</Link>
-          <Link to="/series" className="text-white hover:text-red-600">Series</Link>
-          <Link to="/movies" className="block hover:text-red-500" >Movies</Link>
+
+          <Link
+            to="/"
+            className={
+              location.pathname === "/"
+                ? "text-red-600 font-bold"
+                : "text-white hover:text-red-600"
+            }
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/movies"
+            className={
+              location.pathname === "/movies"
+                ? "text-red-600 font-bold"
+                : "text-white hover:text-red-600"
+            }
+          >
+            Movies
+          </Link>
+
+          <Link
+            to="/series"
+            className={
+              location.pathname === "/series"
+                ? "text-red-600 font-bold"
+                : "text-white hover:text-red-600"
+            }
+          >
+            Series
+          </Link>
         </nav>
 
         {/* MOBILE MENU BUTTON */}
@@ -77,9 +113,43 @@ function Header({ onSearch }) {
       {/* MOBILE DROPDOWN */}
       {menuOpen && (
         <div className="md:hidden bg-[#0e0d0d] text-white w-full px-6 py-4 space-y-4 fixed top-20 left-0 z-40">
-          <Link to="/" className="block hover:text-red-500">Home</Link>
-          <Link to="/series" className="block hover:text-red-500">Series</Link>
-          <Link to="/movies" className="block hover:text-red-500" >Movies</Link>
+
+          <Link
+            to="/"
+            className={
+              location.pathname === "/"
+                ? "text-red-600 font-bold block"
+                : "block hover:text-red-500"
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/movies"
+            className={
+              location.pathname === "/movies"
+                ? "text-red-600 font-bold block"
+                : "block hover:text-red-500"
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            Movies
+          </Link>
+
+          <Link
+            to="/series"
+            className={
+              location.pathname === "/series"
+                ? "text-red-600 font-bold block"
+                : "block hover:text-red-500"
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            Series
+          </Link>
+
         </div>
       )}
     </>

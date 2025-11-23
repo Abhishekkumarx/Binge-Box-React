@@ -1,8 +1,14 @@
 // Series.jsx
 import React from "react";
+import { useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 
-export default function Series({ results, loading, error }) {
+export default function Series({ results, loading, error, fetchResults }){
+useEffect(() => {
+  fetchResults("money heist", "series");  
+}, []);
+
+
   return (
     <div className="flex flex-col gap-8 pt-24">
       <h1 className="text-3xl font-bold">Popular Series</h1>

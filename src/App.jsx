@@ -1,11 +1,13 @@
 import './App.css'
-import { useState } from "react";
+import {useState ,useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Series from "./pages/Series";
 import { Routes, Route } from "react-router-dom";
 import Movies from './pages/Movies';
+import { useNavigate } from "react-router-dom";
+
 
 const apiKey = "875daaf7";
 
@@ -13,6 +15,13 @@ function App() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  //const location = useLocation();
+  const navigate = useNavigate();
+  // Always go to Home after refresh
+
+
+
 
   // GLOBAL FETCH FUNCTION (will be used by Home + Series)
  // fetch movies + series depending on page
@@ -56,6 +65,18 @@ const fetchResults = async (query, type) => {
   setLoading(false);
 };
 
+useEffect(() => {
+  fetchResults("thor", "all");   // Default content when app starts
+}, []);
+useEffect(() => {
+  if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+    navigate("/");
+  }
+}, []);
+
+
+
+
 
 
   return (
@@ -65,15 +86,15 @@ const fetchResults = async (query, type) => {
       <Routes>
         <Route
           path="/"
-          element={<Home results={results} loading={loading} error={error} />}
+          element={<Home results={results} loading={loading} error={error} fetchResults={fetchResults} />}
         />
         <Route
           path="/series"
-          element={<Series results={results} loading={loading} error={error} />}
+          element={<Series results={results} loading={loading} error={error} fetchResults={fetchResults} />}
         />
         <Route
           path="/movies"
-          element={<Movies results={results} loading={loading} error={error} />}
+          element={<Movies results={results} loading={loading} error={error} fetchResults={fetchResults} />}
         />
       </Routes>
 
