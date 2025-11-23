@@ -1,16 +1,21 @@
-// Series.jsx
+// Movies.jsx
 import React from "react";
 import MovieCard from "../components/MovieCard";
 
-export default function Series({ results, loading, error }) {
+export default function Movies({ results, loading, error }) {
+
+  // FILTER ONLY MOVIES
+  const movies = results.filter(item => item.Type === "movie");
+
   return (
-    <div className="flex flex-col gap-8 pt-24">
-      <h1 className="text-3xl font-bold">Popular Series</h1>
+    <div className="flex flex-col gap-12 pt-24">
+      
+      <h1 className="text-3xl font-bold">Popular Movies</h1>
 
       {loading && <div className="text-gray-400 text-lg">Loading...</div>}
       {error && <div className="text-red-400 text-lg">{error}</div>}
 
-      {!loading && !error && (
+      {!loading && !error && movies.length > 0 && (
         <div
           className="
             grid 
@@ -22,10 +27,14 @@ export default function Series({ results, loading, error }) {
             gap-6
           "
         >
-          {results.map((movie) => (
+          {movies.map((movie) => (
             <MovieCard key={movie.imdbID} movie={movie} />
           ))}
         </div>
+      )}
+
+      {!loading && !error && movies.length === 0 && (
+        <p className="text-gray-400 text-center">No movie results found.</p>
       )}
     </div>
   );

@@ -1,16 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-
-function Header() {
+function Header({ onSearch }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  const location = useLocation();
+
+  // Handle Search Submit
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!searchText.trim()) return;
+
+    //const pageType = location.pathname === "/series" ? "series" : "all";
+  const pageType =
+  location.pathname === "/series"
+    ? "series"
+    : location.pathname === "/movies"
+    ? "movie"
+    : "all";  // home page
+
+    onSearch(searchText.trim(), pageType);
+  };
 
   return (
     <>
       {/* HEADER */}
-      <header
-        className="fixed top-0 left-0 w-full h-20 bg-[#0e0d0d] text-white px-4 md:px-6 flex items-center justify-between z-50"
-      >
+      <header className="fixed top-0 left-0 w-full h-20 bg-[#0e0d0d] text-white px-4 md:px-6 flex items-center justify-between z-50">
+
         {/* LOGO */}
         <div className="flex items-center space-x-2 cursor-pointer">
           <img
@@ -23,21 +40,29 @@ function Header() {
           </h1>
         </div>
 
-        {/* SEARCH (ALWAYS VISIBLE) */}
-        <div className="flex items-center bg-[#414141] rounded-full px-3 py-2 w-40 sm:w-52 md:w-96">
+        {/* SEARCH BAR */}
+        <form
+          onSubmit={handleSearch}
+          className="flex items-center bg-[#414141] rounded-full px-3 py-2 w-40 sm:w-52 md:w-96"
+        >
           <input
             type="text"
             placeholder="Search..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
             className="w-full bg-transparent outline-none text-gray-300 text-sm md:text-base"
           />
-          <i className="text-gray-300 text-lg md:text-xl cursor-pointer">🔍</i>
-        </div>
+
+          <button type="submit">
+            <i className="text-gray-300 text-lg md:text-xl cursor-pointer">🔍</i>
+          </button>
+        </form>
 
         {/* DESKTOP NAVIGATION */}
         <nav className="hidden md:flex space-x-8 text-lg">
-                <Link to="/" className="text-white hover:text-red-700 ">Home</Link>
-                <Link to="/series" className="text-white hover:text-red-600">Series</Link>
-
+          <Link to="/" className="text-white hover:text-red-700">Home</Link>
+          <Link to="/series" className="text-white hover:text-red-600">Series</Link>
+          <Link to="/movies" className="block hover:text-red-500" >Movies</Link>
         </nav>
 
         {/* MOBILE MENU BUTTON */}
@@ -49,15 +74,12 @@ function Header() {
         </button>
       </header>
 
-      {/* MOBILE DROPDOWN MENU */}
+      {/* MOBILE DROPDOWN */}
       {menuOpen && (
         <div className="md:hidden bg-[#0e0d0d] text-white w-full px-6 py-4 space-y-4 fixed top-20 left-0 z-40">
-          <a href="#" className="block text-red-500 underline underline-offset-4">
-            Home
-          </a>
-          <a href="#" className="block hover:text-red-500">Movies</a>
-          <a href="#" className="block hover:text-red-500">TV Series</a>
-          <a href="#" className="block hover:text-red-500">About Us</a>
+          <Link to="/" className="block hover:text-red-500">Home</Link>
+          <Link to="/series" className="block hover:text-red-500">Series</Link>
+          <Link to="/movies" className="block hover:text-red-500" >Movies</Link>
         </div>
       )}
     </>

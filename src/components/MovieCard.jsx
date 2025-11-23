@@ -2,11 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-/**
- * MovieCard.jsx
- * UI UX for each movie card
- * Uses hover animation and rounded edges
- */
+
 export default function MovieCard({ movie }) {
   const poster =
     movie.Poster && movie.Poster !== "N/A"
