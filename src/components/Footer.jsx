@@ -1,27 +1,84 @@
-import React from 'react'
+// src/components/Footer.jsx
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
-function Footer() {
+export default function Footer() {
+  const location = useLocation(); // Track current page for active link
+
   return (
-     <footer
-        className="w-full bg-black text-gray-300 py-4 bg-cover bg-center bg-no-repeat relative pt-20"
-      >
+    <footer className="w-full bg-black text-white py-10 px-6 mt-20">
 
-        <h1 className='text-white'>BingeBox is a free TV shows streaming website with zero ads.
-             It allows you to watch TV shows online, <b>watch TV shows online free in high quality for free.</b> 
-              You can also download full TV shows and watch them later if you want.</h1>
-              <h2>This site does not store any files on our server; we only link to the media hosted on 3rd party services.</h2>
-      <div className="absolute inset-0 bg-black/70"></div>
+      {/* ABOUT SECTION */}
+      <div className="max-w-6xl mx-auto text-center mb-12 px-2">
+        <h1 className="text-3xl font-bold text-red-600 mb-4">ABOUT US</h1>
 
-      <div className="relative max-w-5xl mx-auto flex items-center justify-center space-x-8 text-lg py-6">
-        <a href="#" className="text-red-500 underline underline-offset-4">Home</a>
-        <a href="#" className="hover:text-red-500 transition">Movies</a>
-        <a href="#" className="hover:text-red-500 transition">TV Series</a>
-        <a href="#" className="hover:text-red-500 transition">Contact Us</a>
-        <a href="#" className="hover:text-red-500 transition">Terms of Service</a>
+        <p className="text-gray-300 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
+          BingeBox is a free platform to explore Movies and TV Series.  
+          Discover details, ratings, and trailers of all your favorite content.
+        </p>
+
+        <p className="text-gray-400 mt-3 text-xs sm:text-sm">
+          *We do not host or upload any videos. All content links belong to third-party providers.*
+        </p>
       </div>
-    </footer>   
-    
-  )
-}
 
-export default Footer
+      {/* NAVIGATION - MOBILE FIRST (STACKED) */}
+      <nav className="
+        flex flex-col items-center gap-4 
+        text-base 
+        sm:flex-row sm:justify-center sm:gap-10
+      ">
+        <Link
+          to="/"
+          className={
+            location.pathname === "/"
+              ? "text-red-600 font-bold"
+              : "text-gray-300 hover:text-red-500"
+          }
+        >
+          Home
+        </Link>
+
+        <Link
+          to="/movies"
+          className={
+            location.pathname === "/movies"
+              ? "text-red-600 font-bold"
+              : "text-gray-300 hover:text-red-500"
+          }
+        >
+          Movies
+        </Link>
+
+        <Link
+          to="/series"
+          className={
+            location.pathname === "/series"
+              ? "text-red-600 font-bold"
+              : "text-gray-300 hover:text-red-500"
+          }
+        >
+          Series
+        </Link>
+
+        
+        <Link
+          to="/terms"
+          className={
+            location.pathname === "/terms"
+              ? "text-red-600 font-bold"
+              : "text-gray-300 hover:text-red-500"
+          }
+        >
+          Terms & Conditions
+        </Link>
+
+      </nav>
+
+      {/* COPYRIGHT */}
+      <div className="text-center text-gray-500 text-xs sm:text-sm mt-10">
+        © {new Date().getFullYear()} BingeBox — All Rights Reserved.
+      </div>
+    </footer>
+  );
+}

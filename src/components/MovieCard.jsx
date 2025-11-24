@@ -13,7 +13,7 @@ export default function MovieCard({ movie }) {
     <Link to={`/movie/${movie.imdbID}`} className="group">
       <div
         className="
-          bg-[#0f1724] 
+          bg-[#373f4b] 
           rounded-xl 
           overflow-hidden 
           shadow-lg 

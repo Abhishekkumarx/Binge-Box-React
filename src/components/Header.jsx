@@ -28,7 +28,10 @@ function Header({ onSearch }) {
     onSearch(searchText.trim(), pageType);
   };
  
-
+    const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMenuOpen(false);
+  };
 
   return (
     <>
@@ -69,6 +72,7 @@ function Header({ onSearch }) {
 
           <Link
             to="/"
+            onClick={scrollToTop}
             className={
               location.pathname === "/"
                 ? "text-red-600 font-bold"
@@ -80,6 +84,7 @@ function Header({ onSearch }) {
 
           <Link
             to="/movies"
+            onClick={scrollToTop}
             className={
               location.pathname === "/movies"
                 ? "text-red-600 font-bold"
@@ -91,6 +96,7 @@ function Header({ onSearch }) {
 
           <Link
             to="/series"
+            onClick={scrollToTop}
             className={
               location.pathname === "/series"
                 ? "text-red-600 font-bold"
@@ -100,9 +106,10 @@ function Header({ onSearch }) {
             Series
           </Link>
           <Link
-            to="/Footer"
+            to="/about"
+            onClick={scrollToTop}
             className={
-              location.pathname === "/"
+              location.pathname === "/about"
                 ? "text-red-600 font-bold"
                 : "text-white hover:text-red-600"
             }
@@ -126,6 +133,11 @@ function Header({ onSearch }) {
 
           <Link
             to="/"
+            onClick={scrollToTop}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setMenuOpen(false);
+            }}
             className={
               location.pathname === "/"
                 ? "text-red-600 font-bold block"
@@ -138,6 +150,7 @@ function Header({ onSearch }) {
 
           <Link
             to="/movies"
+            onClick={scrollToTop}
             className={
               location.pathname === "/movies"
                 ? "text-red-600 font-bold block"
@@ -150,6 +163,7 @@ function Header({ onSearch }) {
 
           <Link
             to="/series"
+            onClick={scrollToTop}
             className={
               location.pathname === "/series"
                 ? "text-red-600 font-bold block"
@@ -162,7 +176,7 @@ function Header({ onSearch }) {
           <Link
             to="/about"
             className={
-              location.pathname === "/movies"
+              location.pathname === "/about"
                 ? "text-red-600 font-bold block"
                 : "block hover:text-red-500"
             }

@@ -9,6 +9,7 @@ import Movies from './pages/Movies';
 import { useNavigate } from "react-router-dom";
 import MovieDetails from './pages/MovieDetails';
 import AboutUs from './pages/AboutUs';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 
 const apiKey = "875daaf7";
@@ -103,7 +104,7 @@ useEffect(() => {
         
 
         <Route path="/movie/:id" element={<MovieDetails />} />
-
+        <Route path="/terms" element={<TermsAndConditions/>} />
       </Routes>
 
       <Footer />
