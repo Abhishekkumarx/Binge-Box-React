@@ -99,6 +99,16 @@ function Header({ onSearch }) {
           >
             Series
           </Link>
+          <Link
+            to="/Footer"
+            className={
+              location.pathname === "/"
+                ? "text-red-600 font-bold"
+                : "text-white hover:text-red-600"
+            }
+          >
+            About Us
+          </Link>
         </nav>
 
         {/* MOBILE MENU BUTTON */}
@@ -149,6 +159,18 @@ function Header({ onSearch }) {
           >
             Series
           </Link>
+          <Link
+            to="/about"
+            className={
+              location.pathname === "/movies"
+                ? "text-red-600 font-bold block"
+                : "block hover:text-red-500"
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            About Us
+          </Link>
+
 
         </div>
       )}

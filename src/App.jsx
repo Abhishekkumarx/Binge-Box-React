@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Movies from './pages/Movies';
 import { useNavigate } from "react-router-dom";
 import MovieDetails from './pages/MovieDetails';
+import AboutUs from './pages/AboutUs';
 
 
 const apiKey = "875daaf7";
@@ -97,6 +98,10 @@ useEffect(() => {
           path="/movies"
           element={<Movies results={results} loading={loading} error={error} fetchResults={fetchResults} />}
         />
+        <Route
+          path="/about" element={<AboutUs />}/>
+        
+
         <Route path="/movie/:id" element={<MovieDetails />} />
 
       </Routes>
