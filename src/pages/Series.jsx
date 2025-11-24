@@ -5,7 +5,7 @@ import MovieCard from "../components/MovieCard";
 
 export default function Series({ results, loading, error, fetchResults }){
 useEffect(() => {
-  fetchResults("money heist", "series");  
+  fetchResults("money", "series");  
 }, []);
 
 
