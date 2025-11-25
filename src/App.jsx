@@ -19,6 +19,9 @@ function App() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [trending, setTrending] = useState([]);
+
+
   const [darkMode, setDarkMode] = useState(
   localStorage.getItem("theme") === "dark"
 );
@@ -72,6 +75,28 @@ const fetchResults = async (query, type) => {
   setLoading(false);
 };
 
+const fetchTrending = async () => {
+  const trendingQueries = ["Avengers", "Batman", "Spider", "Thor"];
+  let temp = [];
+
+  for (const q of trendingQueries) {
+    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${q}&type=movie`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.Response === "True") {
+      temp = [...temp, ...data.Search.slice(0, 5)]; // limit results
+    }
+  }
+
+  setTrending(temp);
+};
+
+useEffect(() => {
+  fetchTrending();
+}, []);
+
+
 useEffect(() => {
   fetchResults("thor", "all");   // Default content when app starts
 }, []);
@@ -102,10 +127,20 @@ useEffect(() => {
 
 
       <Routes>
-        <Route
-          path="/"
-          element={<Home results={results} loading={loading} error={error} fetchResults={fetchResults} />}
-        />
+        
+            <Route
+              path="/"
+              element={
+                <Home
+                  results={results}
+                  loading={loading}
+                  error={error}
+                  fetchResults={fetchResults}
+                  trending={trending}
+                />
+              }
+            />
+
         <Route
           path="/series"
           element={<Series results={results} loading={loading} error={error} fetchResults={fetchResults} />}
