@@ -10,7 +10,8 @@ useEffect(() => {
 
 
   return (
-    <div className="flex flex-col gap-12 pt-24 bg-white dark:bg-black text-black dark:text-white">
+    <div className="flex flex-col gap-12 pt-24 bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-light] dark:text-[--text-dark]">
+
 
       <h1 className="text-3xl font-bold self-center">Popular Series</h1>
 

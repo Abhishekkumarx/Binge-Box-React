@@ -1,24 +1,40 @@
+/* src/index.css */
 @import "tailwindcss";
 
-/* ---- CUSTOM TAILWIND V4 THEME ---- */
+/* Cinematic theme variables for Tailwind v4 */
 @theme {
-  --color-bg-light: white;
-  --color-bg-dark: #000000;
+  --bg-light: #f8fafc;        /* slate-50 */
+  --text-light: #0f172a;      /* slate-900 */
+  --muted-light: #64748b;     /* slate-400 */
 
-  --color-text-light: black;
-  --color-text-dark: #e5e5e5;
+  --bg-dark: #0b0b0d;         /* near black */
+  --text-dark: #f1f5f9;       /* soft white */
+  --muted-dark: #94a3b8;      /* muted text */
+
+  --card-dark: #111317;       /* card background dark */
+  --card-light: #ffffff;      /* card background light */
+
+  --accent: #ef4444;          /* red accent */
 }
 
-/* Light mode (default) */
+/* Default (light) */
 :root {
   color-scheme: light;
-  background-color: var(--color-bg-light);
-  color: var(--color-text-light);
+  background-color: var(--bg-light);
+  color: var(--text-light);
 }
 
-/* Dark mode (activated when .dark class is on <html>) */
+/* Dark mode, when .dark added to <html> or top root wrapper */
 .dark {
   color-scheme: dark;
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-dark);
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Helpful utility (optional) */
+.app-bg {
+  background-color: var(--bg-light);
+}
+.dark .app-bg {
+  background-color: var(--bg-dark);
 }

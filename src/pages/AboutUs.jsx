@@ -7,7 +7,7 @@ export default function AboutUs() {
   }, []);
 
   return (
-    <div className="pt-24 p-6 bg-white dark:bg-black text-black dark:text-white">
+    <div className="pt-24 p-6 min-h-screen bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-light] dark:text-[--text-dark]">
 
      
     </div>

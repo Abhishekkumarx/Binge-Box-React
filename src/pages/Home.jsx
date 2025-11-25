@@ -13,7 +13,8 @@ export default function Home({ results, loading, error, fetchResults }) {
 }, []);
 
   return (
-    <div className="flex flex-col gap-12 pt-24 bg-[--color-bg-light] dark:bg-[--color-bg-dark] text-[--color-text-light] dark:text-[--color-text-dark]">
+    <div className="flex flex-col gap-12 pt-24 bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-light] dark:text-[--text-dark]">
+
 
 
 

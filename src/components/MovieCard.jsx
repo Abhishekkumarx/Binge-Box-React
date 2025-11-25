@@ -13,7 +13,7 @@ export default function MovieCard({ movie }) {
     <Link to={`/movie/${movie.imdbID}`} className="group">
       <div
         className="
-          bg-[#373f4b] 
+          bg-[#619194] 
           rounded-xl 
           overflow-hidden 
           shadow-lg 
@@ -33,7 +33,7 @@ export default function MovieCard({ movie }) {
         {/* Text */}
         <div className="p-3">
           <h3 className="font-semibold text-sm line-clamp-2">{movie.Title}</h3>
-          <p className="text-xs text-gray-400 mt-1">{movie.Year}</p>
+          <p className="text-xs  mt-1">{movie.Year}</p>
         </div>
       </div>
     </Link>

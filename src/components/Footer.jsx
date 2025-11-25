@@ -6,18 +6,19 @@ export default function Footer() {
   const location = useLocation(); // Track current page for active link
 
   return (
-    <footer className="bg-black dark:bg-gray-900 text-white dark:text-gray-300">
+    <footer className="w-full py-8 bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-light] dark:text-[--text-dark]">
+
 
       {/* ABOUT SECTION */}
       <div className="max-w-6xl mx-auto text-center mb-12 px-2">
         <h1 className="text-3xl font-bold text-red-600 mb-4">ABOUT US</h1>
 
-        <p className="text-gray-300 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
+        <p className=" max-w-3xl mx-auto text-sm sm:text-base leading-relaxed ">
           BingeBox is a free platform to explore Movies and TV Series.  
           Discover details, ratings, and trailers of all your favorite content.
         </p>
 
-        <p className="text-gray-400 mt-3 text-xs sm:text-sm">
+        <p className=" mt-3 text-xs sm:text-sm">
           *We do not host or upload any videos. All content links belong to third-party providers.*
         </p>
       </div>
@@ -33,7 +34,7 @@ export default function Footer() {
           className={
             location.pathname === "/"
               ? "text-red-600 font-bold"
-              : "text-gray-300 hover:text-red-500"
+              : " hover:text-red-500"
           }
         >
           Home
@@ -44,7 +45,7 @@ export default function Footer() {
           className={
             location.pathname === "/movies"
               ? "text-red-600 font-bold"
-              : "text-gray-300 hover:text-red-500"
+              : " hover:text-red-500"
           }
         >
           Movies
@@ -55,7 +56,7 @@ export default function Footer() {
           className={
             location.pathname === "/series"
               ? "text-red-600 font-bold"
-              : "text-gray-300 hover:text-red-500"
+              : " hover:text-red-500"
           }
         >
           Series
@@ -67,7 +68,7 @@ export default function Footer() {
           className={
             location.pathname === "/terms"
               ? "text-red-600 font-bold"
-              : "text-gray-300 hover:text-red-500"
+              : " hover:text-red-500"
           }
         >
           Terms & Conditions

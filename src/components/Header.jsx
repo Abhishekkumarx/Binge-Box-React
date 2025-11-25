@@ -36,7 +36,15 @@ function Header({ onSearch, darkMode, setDarkMode }) {
   return (
     <>
       {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full h-20  px-4 md:px-6 flex items-center justify-between z-50 bg-gray-900 dark:bg-black text-white dark:text-gray-200">
+      <header className="
+        fixed top-0 left-0 w-full h-20 flex items-center justify-between 
+        px-4 md:px-6 z-50 
+        bg-[var(--bg-dark)] dark:bg-[var(--bg-dark)]
+        text-[var(--text-dark)] dark:text-[var(--text-dark)]
+        border-b border-[var(--muted-dark)]/20
+      ">
+
+
 
         {/* LOGO */}
         <Link to="/" className="flex items-center space-x-2 cursor-pointer">
@@ -75,8 +83,8 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             onClick={scrollToTop}
             className={
               location.pathname === "/"
-                ? "text-red-600 font-bold"
-                : "text-white hover:text-red-600"
+                ? "text-[var(--accent)] font-semibold"
+                : "hover:text-[var(--accent)] text-[var(--text-dark)]"
             }
           >
             Home
@@ -87,8 +95,8 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             onClick={scrollToTop}
             className={
               location.pathname === "/movies"
-                ? "text-red-600 font-bold"
-                : "text-white hover:text-red-600"
+                ? "text-[var(--accent)] font-semibold"
+                : "hover:text-[var(--accent)] text-[var(--text-dark)]"
             }
           >
             Movies
@@ -99,8 +107,8 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             onClick={scrollToTop}
             className={
               location.pathname === "/series"
-                ? "text-red-600 font-bold"
-                : "text-white hover:text-red-600"
+                ? "text-[var(--accent)] font-semibold"
+                : "hover:text-[var(--accent)] text-[var(--text-dark)]"
             }
           >
             Series
@@ -110,8 +118,8 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             onClick={scrollToTop}
             className={
               location.pathname === "/about"
-                ? "text-red-600 font-bold"
-                : "text-white hover:text-red-600"
+                ? "text-[var(--accent)] font-semibold"
+                : "hover:text-[var(--accent)] text-[var(--text-dark)]"
             }
           >
             About Us
@@ -119,10 +127,11 @@ function Header({ onSearch, darkMode, setDarkMode }) {
         </nav>
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="text-xl md:text-2xl mx-4"
+          className="ml-2 px-3 py-1 rounded-md bg-[var(--card-dark)] hover:bg-[var(--card-dark)]/90"
         >
           {darkMode ? "🌙" : "☀️"}
         </button>
+
 
 
         {/* MOBILE MENU BUTTON */}
@@ -136,7 +145,10 @@ function Header({ onSearch, darkMode, setDarkMode }) {
 
       {/* MOBILE DROPDOWN */}
       {menuOpen && (
-        <div className="md:hidden bg-[#0e0d0d] text-white w-full px-6 py-4 space-y-4 fixed top-20 left-0 z-40">
+        <div className="md:hidden fixed top-20 left-0 w-full z-40">
+          <div className="bg-[var(--bg-dark)] text-[var(--text-dark)] w-full px-6 py-4 space-y-4 border-b border-[var(--muted-dark)]/20">
+
+          
 
           <Link
             to="/"
@@ -146,8 +158,8 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             }}
             className={
               location.pathname === "/"
-                ? "text-red-600 font-bold block"
-                : "block hover:text-red-500"
+                ? "text-[var(--accent)] font-semibold block"
+                : "block hover:text-[var(--accent)]"         
             }
           >
             Home
@@ -162,8 +174,9 @@ function Header({ onSearch, darkMode, setDarkMode }) {
           }}
           className={
             location.pathname === "/movies"
-              ? "text-red-600 font-bold block"
-              : "block hover:text-red-500"
+             ? "text-[var(--accent)] font-semibold block"
+             : "block hover:text-[var(--accent)]"
+      
           }
         >
           Movies
@@ -178,8 +191,9 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             }}
             className={
               location.pathname === "/series"
-                ? "text-red-600 font-bold block"
-                : "block hover:text-red-500"
+                ? "text-[var(--accent)] font-semibold block"
+                : "block hover:text-[var(--accent)]"
+          
             }
           >
             Series
@@ -187,21 +201,27 @@ function Header({ onSearch, darkMode, setDarkMode }) {
 
           <Link
             to="/about"
+            onClick={() => {
+                scrollToTop();
+                setMenuOpen(false);
+              }}
             className={
               location.pathname === "/about"
-                ? "text-red-600 font-bold block"
-                : "block hover:text-red-500"
+                ? "text-[var(--accent)] font-semibold block"
+                 : "block hover:text-[var(--accent)]"
             }
-            onClick={() => setMenuOpen(false)}
+            
           >
             About Us
           </Link>
-
-
+          
         </div>
+      </div>
+        
       )}
+      
     </>
-  );
+    );
 }
 
 export default Header;
