@@ -1,7 +1,5 @@
-/* src/index.css */
 @import "tailwindcss";
 
-/* Cinematic theme variables for Tailwind v4 */
 @theme {
   --bg-light: #f8fafc;        /* slate-50 */
   --text-light: #0f172a;      /* slate-900 */
@@ -17,33 +15,21 @@
   --accent: #ef4444;          /* red accent */
 }
 
-/* Default (light) */
 :root {
   color-scheme: light;
   background-color: var(--bg-light);
   color: var(--text-light);
 }
 
-/* Dark mode, when .dark added to <html> or top root wrapper */
 .dark {
   color-scheme: dark;
   background-color: var(--bg-dark);
   color: var(--text-dark);
 }
 
-/* Helpful utility (optional) */
 .app-bg {
   background-color: var(--bg-light);
 }
 .dark .app-bg {
   background-color: var(--bg-dark);
 }
-/* Hide ugly scrollbar */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-

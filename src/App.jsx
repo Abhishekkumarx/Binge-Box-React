@@ -26,15 +26,11 @@ function App() {
   localStorage.getItem("theme") === "dark"
 );
 
-  //const location = useLocation();
   const navigate = useNavigate();
-  // Always go to Home after refresh
 
 
 
 
-  // GLOBAL FETCH FUNCTION (will be used by Home + Series)
- // fetch movies + series depending on page
 const fetchResults = async (query, type) => {
   if (!query) return;
 
@@ -43,7 +39,6 @@ const fetchResults = async (query, type) => {
   let finalResults = [];
 
   try {
-    // Fetch Movies
     if (type === "movie" || type === "all") {
       const movieURL = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}&type=movie`;
       const movieRes = await fetch(movieURL);
@@ -53,7 +48,6 @@ const fetchResults = async (query, type) => {
       }
     }
 
-    // Fetch Series
     if (type === "series" || type === "all") {
       const seriesURL = `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}&type=series`;
       const seriesRes = await fetch(seriesURL);
@@ -85,7 +79,7 @@ const fetchTrending = async () => {
     const data = await res.json();
 
     if (data.Response === "True") {
-      temp = [...temp, ...data.Search.slice(0, 5)]; // limit results
+      temp = [...temp, ...data.Search.slice(0, 5)];
     }
   }
 
@@ -98,7 +92,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-  fetchResults("thor", "all");   // Default content when app starts
+  fetchResults("thor", "all");   
 }, []);
 useEffect(() => {
   if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
@@ -149,8 +143,8 @@ useEffect(() => {
           path="/movies"
           element={<Movies results={results} loading={loading} error={error} fetchResults={fetchResults} />}
         />
-        <Route
-          path="/about" element={<AboutUs />}/>
+        {/* <Route
+          path="/about" element={<AboutUs />}/> */}
         
 
         <Route path="/movie/:id" element={<MovieDetails />} />

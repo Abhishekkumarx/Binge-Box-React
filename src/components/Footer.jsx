@@ -1,15 +1,17 @@
-// src/components/Footer.jsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Footer() {
-  const location = useLocation(); // Track current page for active link
+  const location = useLocation(); 
 
   return (
-    <footer className="w-full py-8 bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-light] dark:text-[--text-dark]">
+    // <footer className="w-full py-8 bg-[--bg-light] dark:bg-[--bg-dark] text-[--text-light] dark:text-[--text-dark]">
+      <footer
+  id="site-footer"
+  className="bg-black text-white py-10"
+>
 
 
-      {/* ABOUT SECTION */}
       <div className="max-w-6xl mx-auto text-center mb-12 px-2">
         <h1 className="text-3xl font-bold text-red-600 mb-4">ABOUT US</h1>
 
@@ -23,7 +25,6 @@ export default function Footer() {
         </p>
       </div>
 
-      {/* NAVIGATION - MOBILE FIRST (STACKED) */}
       <nav className="
         flex flex-col items-center gap-4 
         text-base 
@@ -76,7 +77,6 @@ export default function Footer() {
 
       </nav>
 
-      {/* COPYRIGHT */}
       <div className="text-center text-gray-500 text-xs sm:text-sm mt-10">
         © {new Date().getFullYear()} BingeBox — All Rights Reserved.
       </div>

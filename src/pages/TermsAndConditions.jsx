@@ -1,8 +1,6 @@
-// src/pages/TermsAndConditions.jsx
 import React, { useEffect } from "react";
 
 export default function TermsAndConditions() {
-  // Scroll to top automatically
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);

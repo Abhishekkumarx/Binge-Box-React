@@ -5,9 +5,7 @@ import YouTube from "react-youtube";
 import Modal from "react-modal";
 
 const OMDB_API_KEY = "875daaf7";
-// Optional: supply your YouTube Data API key here (or via env and import)
-// If left empty, the app will fall back to opening a YouTube search page.
-const YOUTUBE_API_KEY = ""; // <-- PUT YOUR YOUTUBE API KEY HERE for embedded trailer
+const YOUTUBE_API_KEY = ""; 
 
 Modal.setAppElement("#root");
 
@@ -22,7 +20,6 @@ export default function MovieDetails() {
 
   useEffect(() => {
     fetchMovieDetails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   async function fetchMovieDetails() {
@@ -45,11 +42,9 @@ export default function MovieDetails() {
     }
   }
 
-  // Try to find trailer using YouTube Data API (preferred)
   async function findTrailerVideoId(title) {
     if (!title) return null;
 
-    // If user provided an API key, use YouTube Data API
     if (YOUTUBE_API_KEY && YOUTUBE_API_KEY.trim() !== "") {
       try {
         const q = encodeURIComponent(`${title} trailer`);
@@ -69,9 +64,6 @@ export default function MovieDetails() {
         return null;
       }
     }
-
-    // No API key: cannot reliably fetch client-side due to CORS.
-    // Return null so caller falls back to opening YouTube search page.
     return null;
   }
 
@@ -79,7 +71,6 @@ export default function MovieDetails() {
     if (!movie) return;
 
     setSearchingTrailer(true);
-    // attempt to get trailer id
     const idFound = await findTrailerVideoId(movie.Title);
     setSearchingTrailer(false);
 
@@ -87,10 +78,8 @@ export default function MovieDetails() {
       setTrailerId(idFound);
       setIsOpen(true);
     } else {
-      // fallback: open youtube search in new tab and show modal message
       const q = encodeURIComponent(`${movie.Title} trailer`);
       window.open(`https://www.youtube.com/results?search_query=${q}`, "_blank");
-      // optionally show a tiny modal telling user you opened YouTube search
       setTrailerId(null);
       setIsOpen(false);
     }
@@ -113,24 +102,20 @@ export default function MovieDetails() {
   return (
     <div className="pt-24 p-6 bg-white dark:bg-black text-black dark:text-white">
 
-      {/* BACKGROUND BLUR */}
       <div
         className="absolute top-0 left-0 w-full h-[60vh] bg-cover bg-center opacity-30 blur-xl"
         style={{ backgroundImage: `url(${movie.Poster !== "N/A" ? movie.Poster : ""})` }}
       />
       <div className="absolute top-0 left-0 w-full h-[60vh] bg-gradient-to-b from-black via-transparent to-black" />
 
-      {/* CONTENT */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row gap-10">
 
-        {/* POSTER */}
         <img
           src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}
           alt={movie.Title}
           className="w-64 md:w-80 rounded-lg shadow-xl"
         />
 
-        {/* DETAILS */}
         <div className="space-y-4">
           <h1 className="text-4xl font-bold">{movie.Title}</h1>
           <p className="text-gray-300">{movie.Year} • {movie.Rated} • {movie.Runtime}</p>
@@ -149,7 +134,6 @@ export default function MovieDetails() {
           <p><strong>Director:</strong> {movie.Director}</p>
           <p><strong>Writer:</strong> {movie.Writer}</p>
 
-          {/* Trailer button (no Watch Now) */}
           <div className="flex gap-4 mt-6">
             <button
               onClick={onOpenTrailer}
@@ -169,7 +153,6 @@ export default function MovieDetails() {
         </div>
       </div>
 
-      {/* TRAILER MODAL: only shown if trailerId exists and modal open */}
       <Modal
         isOpen={isOpen}
         onRequestClose={closeTrailer}

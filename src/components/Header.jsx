@@ -5,25 +5,22 @@ function Header({ onSearch, darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
-  const location = useLocation(); // ✅ CORRECT: inside component
+  const location = useLocation();
 
-   // Clear search input when changing pages
   useEffect(() => {
     setSearchText("");  
   }, [location.pathname]);
   
-  // Handle Search Submit
   const handleSearch = (e) => {
     e.preventDefault();
     if (!searchText.trim()) return;
 
-    // Page type based on current route
     const pageType =
       location.pathname === "/series"
         ? "series"
         : location.pathname === "/movies"
         ? "movie"
-        : "all"; // default for home
+        : "all"; 
 
     onSearch(searchText.trim(), pageType);
   };
@@ -33,9 +30,17 @@ function Header({ onSearch, darkMode, setDarkMode }) {
     setMenuOpen(false);
   };
 
+  const scrollToFooter = () => {
+  const footer = document.getElementById("site-footer");
+  if (footer) {
+    footer.scrollIntoView({ behavior: "smooth" });
+  }
+  setMenuOpen(false);
+};
+
+
   return (
     <>
-      {/* HEADER */}
       <header className="
         fixed top-0 left-0 w-full h-20 flex items-center justify-between 
         px-4 md:px-6 z-50 
@@ -46,7 +51,6 @@ function Header({ onSearch, darkMode, setDarkMode }) {
 
 
 
-        {/* LOGO */}
         <Link to="/" className="flex items-center space-x-2 cursor-pointer">
           <img
             src="https://cdn-icons-png.flaticon.com/512/3163/3163478.png"
@@ -58,7 +62,6 @@ function Header({ onSearch, darkMode, setDarkMode }) {
           </h1>
         </Link>
 
-        {/* SEARCH BAR */}
         <form
           onSubmit={handleSearch}
           className="flex items-center bg-[#414141] rounded-full px-3 py-2 w-40 sm:w-52 md:w-96"
@@ -75,7 +78,6 @@ function Header({ onSearch, darkMode, setDarkMode }) {
           </button>
         </form>
 
-        {/* DESKTOP NAVIGATION */}
         <nav className="hidden md:flex space-x-8 text-lg">
 
           <Link
@@ -113,17 +115,13 @@ function Header({ onSearch, darkMode, setDarkMode }) {
           >
             Series
           </Link>
-          <Link
-            to="/about"
-            onClick={scrollToTop}
-            className={
-              location.pathname === "/about"
-                ? "text-[var(--accent)] font-semibold"
-                : "hover:text-[var(--accent)] text-[var(--text-dark)]"
-            }
-          >
-            About Us
-          </Link>
+          <button
+          onClick={scrollToFooter}
+          className="hover:text-[var(--accent)] text-[var(--text-dark)]"
+        >
+          About Us
+        </button>
+
         </nav>
         <button
           onClick={() => setDarkMode(!darkMode)}
@@ -134,7 +132,6 @@ function Header({ onSearch, darkMode, setDarkMode }) {
 
 
 
-        {/* MOBILE MENU BUTTON */}
         <button
           className="md:hidden text-3xl"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -143,7 +140,6 @@ function Header({ onSearch, darkMode, setDarkMode }) {
         </button>
       </header>
 
-      {/* MOBILE DROPDOWN */}
       {menuOpen && (
         <div className="md:hidden fixed top-20 left-0 w-full z-40">
           <div className="bg-[var(--bg-dark)] text-[var(--text-dark)] w-full px-6 py-4 space-y-4 border-b border-[var(--muted-dark)]/20">
@@ -153,8 +149,8 @@ function Header({ onSearch, darkMode, setDarkMode }) {
           <Link
             to="/"
             onClick={() => {
-              scrollToTop();       // scroll page to top
-              setMenuOpen(false);  // close mobile menu
+              scrollToTop();       
+              setMenuOpen(false);  
             }}
             className={
               location.pathname === "/"
@@ -199,7 +195,7 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             Series
           </Link>
 
-          <Link
+          {/* <Link
             to="/about"
             onClick={() => {
                 scrollToTop();
@@ -213,7 +209,18 @@ function Header({ onSearch, darkMode, setDarkMode }) {
             
           >
             About Us
-          </Link>
+          </Link> */}
+
+          <button
+          onClick={() => {
+            scrollToFooter();
+            setMenuOpen(false);
+          }}
+          className="block hover:text-[var(--accent)]"
+        >
+          About Us
+        </button>
+
           
         </div>
       </div>

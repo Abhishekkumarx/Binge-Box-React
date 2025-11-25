@@ -1,4 +1,3 @@
-// Series.jsx
 import React from "react";
 import { useEffect } from "react";
 import MovieCard from "../components/MovieCard";

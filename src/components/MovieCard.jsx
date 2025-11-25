@@ -1,4 +1,3 @@
-// src/components/MovieCard.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -23,14 +22,12 @@ export default function MovieCard({ movie }) {
           duration-200
         "
       >
-        {/* Poster */}
         <img
           src={poster}
           alt={movie.Title}
           className="w-full h-64 object-cover group-hover:opacity-90 transition"
         />
 
-        {/* Text */}
         <div className="p-3">
           <h3 className="font-semibold text-sm line-clamp-2">{movie.Title}</h3>
           <p className="text-xs  mt-1">{movie.Year}</p>

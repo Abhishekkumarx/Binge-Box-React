@@ -1,11 +1,9 @@
-// Movies.jsx
 import React from "react";
 import { useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 
 export default function Movies({ results, loading, error, fetchResults }) {
 
-  // FILTER ONLY MOVIES
   const movies = results.filter(item => item.Type === "movie");
   useEffect(() => {
   fetchResults("singham", "movie");  
