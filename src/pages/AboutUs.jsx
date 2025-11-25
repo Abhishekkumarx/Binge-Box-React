@@ -7,7 +7,8 @@ export default function AboutUs() {
   }, []);
 
   return (
-    <div>
+    <div className="pt-24 p-6 bg-white dark:bg-black text-black dark:text-white">
+
      
     </div>
   );

@@ -8,9 +8,10 @@ export default function TermsAndConditions() {
   }, []);
 
   return (
-    <div className="pt-24 px-6 text-white max-w-4xl mx-auto">
+    <div className="pt-24 p-6 bg-white dark:bg-black text-black dark:text-white self-center">
 
-      <h1 className="text-3xl font-bold text-red-600 mb-6">
+
+      <h1 className="text-3xl font-bold text-red-600 mb-6 self-center text-center">
         Terms & Conditions
       </h1>
 

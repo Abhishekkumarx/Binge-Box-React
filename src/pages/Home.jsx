@@ -13,9 +13,11 @@ export default function Home({ results, loading, error, fetchResults }) {
 }, []);
 
   return (
-    <div className="flex flex-col gap-12 pt-24">
+    <div className="flex flex-col gap-12 pt-24 bg-[--color-bg-light] dark:bg-[--color-bg-dark] text-[--color-text-light] dark:text-[--color-text-dark]">
 
-      <h1 className="text-3xl font-bold">Popular Movies & Series</h1>
+
+
+      <h1 className="text-3xl font-bold self-center">Popular Movies & Series</h1>
 
       {/* Loading */}
       {loading && <div className="text-gray-400 text-lg">Loading...</div>}
@@ -26,7 +28,7 @@ export default function Home({ results, loading, error, fetchResults }) {
       {/* --- MOVIES SECTION --- */}
       {!loading && !error && movies.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold mb-4">Movies</h2>
+        
 
           <div
             className="

@@ -6,7 +6,7 @@ export default function Footer() {
   const location = useLocation(); // Track current page for active link
 
   return (
-    <footer className="w-full bg-black text-white py-10 px-6 mt-20">
+    <footer className="bg-black dark:bg-gray-900 text-white dark:text-gray-300">
 
       {/* ABOUT SECTION */}
       <div className="max-w-6xl mx-auto text-center mb-12 px-2">

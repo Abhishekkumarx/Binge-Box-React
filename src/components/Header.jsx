@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-function Header({ onSearch }) {
+function Header({ onSearch, darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -36,7 +36,7 @@ function Header({ onSearch }) {
   return (
     <>
       {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full h-20 bg-[#0e0d0d] text-white px-4 md:px-6 flex items-center justify-between z-50">
+      <header className="fixed top-0 left-0 w-full h-20  px-4 md:px-6 flex items-center justify-between z-50 bg-gray-900 dark:bg-black text-white dark:text-gray-200">
 
         {/* LOGO */}
         <Link to="/" className="flex items-center space-x-2 cursor-pointer">
@@ -117,6 +117,13 @@ function Header({ onSearch }) {
             About Us
           </Link>
         </nav>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="text-xl md:text-2xl mx-4"
+        >
+          {darkMode ? "🌙" : "☀️"}
+        </button>
+
 
         {/* MOBILE MENU BUTTON */}
         <button
@@ -133,46 +140,51 @@ function Header({ onSearch }) {
 
           <Link
             to="/"
-            onClick={scrollToTop}
             onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              setMenuOpen(false);
+              scrollToTop();       // scroll page to top
+              setMenuOpen(false);  // close mobile menu
             }}
             className={
               location.pathname === "/"
                 ? "text-red-600 font-bold block"
                 : "block hover:text-red-500"
             }
-            onClick={() => setMenuOpen(false)}
           >
             Home
           </Link>
 
-          <Link
-            to="/movies"
-            onClick={scrollToTop}
-            className={
-              location.pathname === "/movies"
-                ? "text-red-600 font-bold block"
-                : "block hover:text-red-500"
-            }
-            onClick={() => setMenuOpen(false)}
-          >
-            Movies
-          </Link>
+
+         <Link
+          to="/movies"
+          onClick={() => {
+            scrollToTop();
+            setMenuOpen(false);
+          }}
+          className={
+            location.pathname === "/movies"
+              ? "text-red-600 font-bold block"
+              : "block hover:text-red-500"
+          }
+        >
+          Movies
+        </Link>
+
 
           <Link
             to="/series"
-            onClick={scrollToTop}
+            onClick={() => {
+              scrollToTop();
+              setMenuOpen(false);
+            }}
             className={
               location.pathname === "/series"
                 ? "text-red-600 font-bold block"
                 : "block hover:text-red-500"
             }
-            onClick={() => setMenuOpen(false)}
           >
             Series
           </Link>
+
           <Link
             to="/about"
             className={

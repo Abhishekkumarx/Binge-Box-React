@@ -18,6 +18,9 @@ function App() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [darkMode, setDarkMode] = useState(
+  localStorage.getItem("theme") === "dark"
+);
 
   //const location = useLocation();
   const navigate = useNavigate();
@@ -78,13 +81,24 @@ useEffect(() => {
 }, []);
 
 
-
+useEffect(() => {
+  if (darkMode) {
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  }
+}, [darkMode]);
 
 
 
   return (
     <>
-      <Header onSearch={fetchResults} />
+     <div className={darkMode ? "dark" : ""}>
+      <div className="min-h-screen bg-[--color-bg-light] dark:bg-[--color-bg-dark] text-[--color-text-light] dark:text-[--color-text-dark]">
+      <Header onSearch={fetchResults} darkMode={darkMode} setDarkMode={setDarkMode} />
+
 
       <Routes>
         <Route
@@ -108,6 +122,8 @@ useEffect(() => {
       </Routes>
 
       <Footer />
+    </div>
+    </div>
     </>
   );
 }

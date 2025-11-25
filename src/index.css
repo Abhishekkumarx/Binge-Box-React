@@ -1,7 +1,24 @@
 @import "tailwindcss";
 
-body{
-    background-color: black;
-    margin: 0;
-    padding: 0;
+/* ---- CUSTOM TAILWIND V4 THEME ---- */
+@theme {
+  --color-bg-light: white;
+  --color-bg-dark: #000000;
+
+  --color-text-light: black;
+  --color-text-dark: #e5e5e5;
+}
+
+/* Light mode (default) */
+:root {
+  color-scheme: light;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-light);
+}
+
+/* Dark mode (activated when .dark class is on <html>) */
+.dark {
+  color-scheme: dark;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
 }

@@ -111,7 +111,8 @@ export default function MovieDetails() {
   if (!movie) return null;
 
   return (
-    <div className="relative pt-24 text-white">
+    <div className="pt-24 p-6 bg-white dark:bg-black text-black dark:text-white">
+
       {/* BACKGROUND BLUR */}
       <div
         className="absolute top-0 left-0 w-full h-[60vh] bg-cover bg-center opacity-30 blur-xl"

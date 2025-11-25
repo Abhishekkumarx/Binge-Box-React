@@ -13,9 +13,10 @@ export default function Movies({ results, loading, error, fetchResults }) {
 
 
   return (
-    <div className="flex flex-col gap-12 pt-24">
+    <div className="flex flex-col gap-12 pt-24 bg-white dark:bg-black text-black dark:text-white">
+
       
-      <h1 className="text-3xl font-bold">Popular Movies</h1>
+      <h1 className="text-3xl font-bold self-center">Popular Movies</h1>
 
       {loading && <div className="text-gray-400 text-lg">Loading...</div>}
       {error && <div className="text-red-400 text-lg">{error}</div>}
