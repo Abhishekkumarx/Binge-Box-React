@@ -63,6 +63,18 @@ export default function Footer() {
           Series
         </Link>
 
+
+        <Link
+          to="/contactus"
+          className={
+            location.pathname === "/contactus"
+              ? "text-red-600 font-bold"
+              : " hover:text-red-500"
+          }
+        >
+          Contact Us
+        </Link>
+
         
         <Link
           to="/terms"

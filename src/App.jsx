@@ -10,6 +10,9 @@ import Movies from './pages/Movies';
 import { useNavigate } from "react-router-dom";
 import MovieDetails from './pages/MovieDetails';
 import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
+//import Pay from './pages/Pay';
+import ProtectedRoute from './components/ProtectedRoute';
 import TermsAndConditions from './pages/TermsAndConditions';
 
 
@@ -145,6 +148,15 @@ useEffect(() => {
         />
         {/* <Route
           path="/about" element={<AboutUs />}/> */}
+
+          <Route 
+          path="/contactus" 
+          element={
+          <ProtectedRoute>
+            <ContactUs />
+          </ProtectedRoute>
+          }
+        />
         
 
         <Route path="/movie/:id" element={<MovieDetails />} />
