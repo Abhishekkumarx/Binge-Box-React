@@ -14,7 +14,7 @@ import ContactUs from './pages/ContactUs';
 //import Pay from './pages/Pay';
 import ProtectedRoute from './components/ProtectedRoute';
 import TermsAndConditions from './pages/TermsAndConditions';
-
+import Pay from './pages/Pay';
 
 const apiKey = "875daaf7";
 
@@ -97,11 +97,11 @@ useEffect(() => {
 useEffect(() => {
   fetchResults("thor", "all");   
 }, []);
-useEffect(() => {
-  if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-    navigate("/");
-  }
-}, []);
+// useEffect(() => {
+//   if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+//     navigate("/");
+//   }
+// }, []);
 
 
 useEffect(() => {
@@ -137,6 +137,8 @@ useEffect(() => {
                 />
               }
             />
+        <Route path="/pay" element={<Pay />} />
+    
 
         <Route
           path="/series"

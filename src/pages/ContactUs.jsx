@@ -10,7 +10,7 @@ function ContactUs() {
     <div className="bg-black text-white min-h-screen w-full flex justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-2xl">
         <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-red-600 mb-4">Contact Us</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-red-600 mb-4 mt-8">Contact Us</h1>
           <p className="text-lg text-gray-300">
             Have a question, feedback, or a suggestion? We'd love to hear from you.
           </p>

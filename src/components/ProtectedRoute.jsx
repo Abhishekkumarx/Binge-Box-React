@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const hasPaid = localStorage.getItem("paid");
+  const hasPaid = localStorage.getItem("contact_paid");
 
   if (!hasPaid) {
     return <Navigate to="/pay" replace />;

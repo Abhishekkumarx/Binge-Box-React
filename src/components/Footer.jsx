@@ -32,6 +32,7 @@ export default function Footer() {
       ">
         <Link
           to="/"
+          onClick={() => window.scrollTo(0, 0)}
           className={
             location.pathname === "/"
               ? "text-red-600 font-bold"
