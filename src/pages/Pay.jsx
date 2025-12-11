@@ -17,7 +17,7 @@ const Pay = () => {
           name: 'Contact Page Access',
           description: 'Payment to unlock Contact page',
           handler: function (response) {
-              localStorage.setItem("contact_paid", "true");
+              sessionStorage.setItem("contact_paid", "true");
               navigate("/contactus");
           },
           theme: {

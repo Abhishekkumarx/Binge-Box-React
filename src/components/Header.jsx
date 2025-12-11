@@ -117,7 +117,7 @@ function Header({ onSearch, darkMode, setDarkMode }) {
           </Link>
           <button
           onClick={scrollToFooter}
-          className="hover:text-[var(--accent)] text-[var(--text-dark)]"
+          className="hover:text-[var(--accent)] text-[var(--text-dark)] cursor-pointer"
         >
           About Us
         </button>
@@ -194,22 +194,6 @@ function Header({ onSearch, darkMode, setDarkMode }) {
           >
             Series
           </Link>
-
-          {/* <Link
-            to="/about"
-            onClick={() => {
-                scrollToTop();
-                setMenuOpen(false);
-              }}
-            className={
-              location.pathname === "/about"
-                ? "text-[var(--accent)] font-semibold block"
-                 : "block hover:text-[var(--accent)]"
-            }
-            
-          >
-            About Us
-          </Link> */}
 
           <button
           onClick={() => {
